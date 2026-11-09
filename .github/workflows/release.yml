@@ -1,0 +1,84 @@
+name: Release
+
+on:
+  push:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Generate version
+        id: version
+        shell: pwsh
+        run: |
+          $cst = [TimeZoneInfo]::FindSystemTimeZoneById('China Standard Time')
+          $now = [TimeZoneInfo]::ConvertTimeFromUtc([DateTime]::UtcNow, $cst)
+          $version = $now.ToString('yyyyMMddHHmmss')
+          Write-Host "version $version"
+          "version=$version" >> $env:GITHUB_OUTPUT
+
+      - name: Generate manifest
+        shell: pwsh
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          $zip = Get-ChildItem 'out/make/zip/win32/x64/*.zip' | Select-Object -First 1
+          $hash = (Get-FileHash $zip.FullName -Algorithm SHA256).Hash.ToLower()
+
+          $manifest = @"
+          {
+            "version": "$env:VERSION",
+            "architecture": {
+              "64bit": {
+                "url": "https://github.com/serosme/luozi/releases/latest/download/$($zip.Name)",
+                "hash": "$hash"
+              }
+            },
+            "shortcuts": [["luozi.exe", "Luozi"]]
+          }
+          "@
+
+          [System.IO.File]::WriteAllText("$PWD/luozi.json", $manifest, (New-Object System.Text.UTF8Encoding($false)))
+
+      - name: Delete existing release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release delete latest --yes --cleanup-tag 2>$null
+          if ($LASTEXITCODE -ne 0) {
+            Write-Host 'no existing release, skipping delete'
+            exit 0
+          }
+
+      - name: Create release and upload assets
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $zip = Get-ChildItem 'out/make/zip/win32/x64/*.zip' | Select-Object -First 1
+          gh release create latest `
+            --latest `
+            $zip.FullName `
+            luozi.json
