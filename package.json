@@ -21,10 +21,10 @@
     "@antfu/eslint-config": "10.0.0",
     "@electron-forge/cli": "8.0.1",
     "@electron-forge/maker-zip": "8.0.1",
-    "@tsconfig/node-ts": "23.6.4",
-    "@tsconfig/node24": "24.0.5",
-    "electron": "45.2.3",
-    "eslint": "10.13.0",
+    "@tsconfig/node-ts": "23.6.5",
+    "@tsconfig/node24": "24.0.6",
+    "electron": "45.3.1",
+    "eslint": "10.14.0",
     "typescript": "6.0.3"
   }
 }
