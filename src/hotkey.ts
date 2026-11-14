@@ -18,7 +18,7 @@ export function paste(): void {
 }
 
 function keydown(e: { keycode: number }): void {
-  // 自动重复会连发 keydown，只认第一次；长按 150ms 才开始
+  // 自动重复只认第一次，长按 150ms 触发
   if (e.keycode !== UiohookKey.CapsLock || armed || timer)
     return
 
@@ -36,12 +36,12 @@ function keyup(e: { keycode: number }): void {
   clearTimeout(timer)
   timer = undefined
 
-  // 短按是正常的大小写切换，不动
+  // 短按就是正常的大小写切换
   if (!armed)
     return
 
   armed = false
   onUp?.()
-  // 长按已翻转一次大小写，再点一次抵消（要等物理 keyup 送完）
+  // 长按已翻转大小写，补一次抵消
   setTimeout(() => uIOhook.keyTap(UiohookKey.CapsLock, []), 50)
 }
