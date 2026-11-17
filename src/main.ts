@@ -1,7 +1,6 @@
 import type { Recording } from './asr.ts'
 import { app, clipboard } from 'electron'
 import { record, transcribe } from './asr.ts'
-import { restore, snapshot } from './clipboard.ts'
 import { paste, startHotkey } from './hotkey.ts'
 import { createTray } from './tray.ts'
 
@@ -41,7 +40,7 @@ async function end(): Promise<void> {
 
     const text = await transcribe(pcm)
     if (text)
-      await deliver(text)
+      deliver(text)
   }
   catch {}
   finally {
@@ -49,9 +48,7 @@ async function end(): Promise<void> {
   }
 }
 
-async function deliver(text: string): Promise<void> {
-  const saved = await snapshot()
-  await clipboard.writeText(text)
+function deliver(text: string): void {
+  clipboard.writeText(text)
   paste()
-  setTimeout(() => void restore(saved, text).catch(() => {}), 300)
 }
