@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "private": true,
-  "packageManager": "pnpm@12.18.0",
+  "packageManager": "pnpm@12.22.0",
   "main": "src/main.ts",
   "scripts": {
     "typecheck": "tsc -p tsconfig.json",
@@ -23,8 +23,8 @@
     "@electron-forge/maker-zip": "8.0.1",
     "@tsconfig/node-ts": "23.6.5",
     "@tsconfig/node24": "24.0.6",
-    "electron": "45.3.1",
-    "eslint": "10.14.0",
+    "electron": "45.4.1",
+    "eslint": "10.15.0",
     "typescript": "6.0.3"
   }
 }
