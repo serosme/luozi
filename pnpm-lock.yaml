@@ -186,38 +186,38 @@ importers:
   .:
     dependencies:
       decibri:
-        specifier: 5.8.0
+        specifier: ^5.8.0
         version: 5.8.0
       smol-toml:
-        specifier: 1.9.1
+        specifier: ^1.9.1
         version: 1.9.1
       uiohook-napi:
-        specifier: 1.5.5
+        specifier: ^1.5.5
         version: 1.5.5
     devDependencies:
       '@antfu/eslint-config':
-        specifier: 10.0.0
+        specifier: ^10.0.0
         version: 10.0.0(@typescript-eslint/typescript-estree@8.73.0(typescript@6.0.3))(@typescript-eslint/utils@8.73.0(eslint@10.15.0(jiti@2.7.0))(typescript@6.0.3))(@vue/compiler-sfc@3.5.45)(eslint@10.15.0(jiti@2.7.0))(typescript@6.0.3)
       '@electron-forge/cli':
-        specifier: 8.0.1
+        specifier: ^8.0.1
         version: 8.0.1
       '@electron-forge/maker-zip':
-        specifier: 8.0.1
+        specifier: ^8.0.1
         version: 8.0.1
       '@tsconfig/node-ts':
-        specifier: 23.6.5
+        specifier: ^23.6.5
         version: 23.6.5
       '@tsconfig/node24':
-        specifier: 24.0.6
+        specifier: ^24.0.6
         version: 24.0.6
       electron:
-        specifier: 45.5.0
+        specifier: ^45.5.0
         version: 45.5.0
       eslint:
-        specifier: 10.15.0
+        specifier: ^10.15.0
         version: 10.15.0(jiti@2.7.0)
       typescript:
-        specifier: 6.0.3
+        specifier: ^6.0.3
         version: 6.0.3
 
 packages:

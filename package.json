@@ -13,18 +13,18 @@
     "build": "electron-forge make"
   },
   "dependencies": {
-    "decibri": "5.8.0",
-    "smol-toml": "1.9.1",
-    "uiohook-napi": "1.5.5"
+    "decibri": "^5.8.0",
+    "smol-toml": "^1.9.1",
+    "uiohook-napi": "^1.5.5"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "10.0.0",
-    "@electron-forge/cli": "8.0.1",
-    "@electron-forge/maker-zip": "8.0.1",
-    "@tsconfig/node-ts": "23.6.5",
-    "@tsconfig/node24": "24.0.6",
-    "electron": "45.5.0",
-    "eslint": "10.15.0",
-    "typescript": "6.0.3"
+    "@antfu/eslint-config": "^10.0.0",
+    "@electron-forge/cli": "^8.0.1",
+    "@electron-forge/maker-zip": "^8.0.1",
+    "@tsconfig/node-ts": "^23.6.5",
+    "@tsconfig/node24": "^24.0.6",
+    "electron": "^45.5.0",
+    "eslint": "^10.15.0",
+    "typescript": "^6.0.3"
   }
 }

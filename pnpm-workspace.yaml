@@ -3,6 +3,14 @@ minimumReleaseAgeStrict: true
 minimumReleaseAgeExcludePrune: true
 trustPolicy: no-downgrade
 trustPolicyIgnoreAfter: 1440
+
+update:
+  ignoreDeps:
+    # TypeScript 7 is the native Go compiler and exposes no JS compiler API,
+    # so typescript-eslint (via @antfu/eslint-config) crashes on it.
+    # Drop this once typescript-eslint supports TS >= 7.1.
+    - typescript
+
 nodeLinker: hoisted
 shellEmulator: true
 
